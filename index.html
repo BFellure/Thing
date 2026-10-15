@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAXIMUM NERD OVERLOAD</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, #2b0057 0%, #000 100%);
+            animation: bgShift 3s infinite alternate;
+        }
+
+        @keyframes bgShift {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .ascii-wrapper {
+            width: 95vw;
+            max-width: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        pre {
+            width: 100%;
+            font-family: monospace;
+            font-weight: bold;
+            text-align: center;
+            /* Auto-scale font size to fit container width perfectly without wrapping */
+            font-size: 2.2vw;
+            line-height: 1.1;
+            white-space: pre;
+            color: #00ffcc;
+            text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff, 0 0 30px #ffff00;
+            animation: textGlitch 0.2s infinite, colorPulse 1s infinite alternate;
+        }
+
+        @keyframes colorPulse {
+            0% { color: #00ffcc; text-shadow: 0 0 15px #ff00ff, 0 0 30px #00ffff; }
+            50% { color: #ffff00; text-shadow: 0 0 15px #ff0055, 0 0 30px #00ff00; }
+            100% { color: #ff00aa; text-shadow: 0 0 15px #00ffff, 0 0 30px #ffff00; }
+        }
+
+        @keyframes textGlitch {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            20% { transform: translate(-3px, 3px) rotate(-1deg); }
+            40% { transform: translate(3px, -2px) rotate(1deg); }
+            60% { transform: translate(-2px, -3px) rotate(0deg); }
+            80% { transform: translate(2px, 2px) rotate(-1deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        .marquee-box {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            overflow: hidden;
+            background: yellow;
+            color: black;
+            font-weight: bold;
+            font-size: 1.5rem;
+            padding: 10px 0;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px yellow;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 5s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Strobe background overlay */
+        .strobe {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 999;
+            animation: strobeEffect 0.1s steps(2) infinite;
+            opacity: 0.15;
+        }
+
+        @keyframes strobeEffect {
+            0% { background: red; }
+            25% { background: blue; }
+            50% { background: lime; }
+            75% { background: yellow; }
+            100% { background: magenta; }
+        }
+    </style>
+</head>
+<body>
+    <div class="strobe"></div>
+    <div class="container">
+        <div class="ascii-wrapper">
+<pre>
+███╗░░░███╗██╗░█████╗░  ██╗░██████╗
+████╗░████║██║██╔══██╗  ██║██╔════╝
+██╔████╔██║██║███████║  ██║╚█████╗░
+██║╚██╔╝██║██║██╔══██║  ██║░╚═══██╗
+██║░╚═╝░██║██║██║░░██║  ██║██████╔╝
+╚═╝░░░░░╚═╝╚═╝╚═╝░░╚═╝  ╚═╝╚═════╝░
+
+███╗░░██╗███████╗██████╗░██████╗░
+████╗░██║██╔════╝██╔══██╗██╔══██╗
+██╔██╗██║█████╗░░██████╔╝██║░░██║
+██║╚████║██╔══╝░░██╔══██╗██║░░██║
+██║░╚███║███████╗██║░░██║██████╔╝
+╚═╝░░╚══╝╚══════╝╚═╝░░╚═╝╚═════╝░
+</pre>
+        </div>
+    </div>
+    
+    <div class="marquee-box">
+        <div class="marquee-content">
+            🚨 MAXIMUM NERD OVERLOAD DETECTED 🚨 EXTREME STROBE MODES ACTIVE 🚨 SPREAD ABSOLUTE CHAOS 🚨
+        </div>
+    </div>
+</body>
+</html>
