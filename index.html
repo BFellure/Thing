@@ -45,6 +45,7 @@
             justify-content: center;
             align-items: center;
             padding: 10px;
+            margin-bottom: 30px;
         }
 
         pre {
@@ -76,29 +77,32 @@
             100% { transform: translate(0, 0) rotate(0deg); }
         }
 
-        .marquee-box {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            overflow: hidden;
-            background: yellow;
-            color: black;
+        /* Fun Button Styling */
+        .fun-btn {
+            background: #ffff00;
+            color: #000;
+            font-size: 1.8rem;
             font-weight: bold;
-            font-size: 1.5rem;
-            padding: 10px 0;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 15px 40px;
+            border: 4px dashed #ff00ff;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 25px #00ffff, inset 0 0 10px #ff0000;
+            animation: btnPulse 0.5s infinite alternate;
             text-transform: uppercase;
-            box-shadow: 0 0 20px yellow;
+            z-index: 10;
         }
 
-        .marquee-content {
-            display: inline-block;
-            white-space: nowrap;
-            animation: marquee 5s linear infinite;
+        .fun-btn:hover {
+            background: #ff00ff;
+            color: #fff;
+            transform: scale(1.1);
         }
 
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+        @keyframes btnPulse {
+            0% { transform: scale(1); box-shadow: 0 0 15px #ffff00; }
+            100% { transform: scale(1.05); box-shadow: 0 0 35px #ff00ff; }
         }
 
         /* Strobe background overlay */
@@ -143,12 +147,57 @@
 ╚═╝░░╚══╝╚══════╝╚═╝░░╚═╝╚═════╝░
 </pre>
         </div>
+        <button class="fun-btn" id="funBtn">Fun Button</button>
     </div>
-    
-    <div class="marquee-box">
-        <div class="marquee-content">
-            🚨 MAXIMUM NERD OVERLOAD DETECTED 🚨 EXTREME STROBE MODES ACTIVE 🚨 SPREAD ABSOLUTE CHAOS 🚨
-        </div>
-    </div>
+
+    <script>
+        const funBtn = document.getElementById('funBtn');
+
+        // Synthesize a laugh track natively using Web Audio API so it works instantly without external file dependencies!
+        function playLaughTrack() {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            
+            // Create a burst of short giggly noise pulses
+            let notes = [400, 350, 420, 380, 450, 400, 500, 420];
+            let startTime = audioCtx.currentTime;
+
+            notes.forEach((freq, index) => {
+                let osc = audioCtx.createOscillator();
+                let gain = audioCtx.createGain();
+
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(freq + (Math.random() * 50 - 25), startTime + (index * 0.08));
+
+                gain.gain.setValueAtTime(0.3, startTime + (index * 0.08));
+                gain.gain.exponentialRampToValueAtTime(0.01, startTime + (index * 0.08) + 0.06);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start(startTime + (index * 0.08));
+                osc.stop(startTime + (index * 0.08) + 0.07);
+            });
+        }
+
+        funBtn.addEventListener('click', () => {
+            // 1. Text-to-Speech: "Mia is a nerd"
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Stop any ongoing speech
+                const utterance = new SpeechSynthesisUtterance("Mia is a nerd");
+                utterance.rate = 1.1;
+                utterance.pitch = 1.2;
+                
+                // Trigger the laugh track right after the speech finishes
+                utterance.onend = () => {
+                    playLaughTrack();
+                };
+
+                window.speechSynthesis.speak(utterance);
+            } else {
+                // Fallback if browser doesn't support speech synthesis
+                playLaughTrack();
+            }
+        });
+    </script>
 </body>
 </html>
